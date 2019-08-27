@@ -16,6 +16,7 @@ Pre-requisites :
 How to test it :
 1. Download the zip file and extract it.
 2. Simply double click on ChatBot.py file and start chatting / or run the code on cmd.
+This model will might throw the deprecation warning but it will not affect its performance.
 
 It will resolve queries like:
 1. what is pnr?
