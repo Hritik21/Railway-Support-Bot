@@ -10,8 +10,9 @@ import json
 import pickle
 import autocorrect
 from autocorrect import spell
-
-
+import speech_recognition as sr
+import pyttsx3
+from DbConnect import PnrStatus
 
 
 with open("intents.json") as file:
@@ -72,11 +73,11 @@ tensorflow.reset_default_graph()
 net = tflearn.input_data(shape = [None , len(training[0])])
 net = tflearn.fully_connected(net,8)
 net = tflearn.fully_connected(net ,8)
-net = tflearn.fully_connected(net,len(output[0]), activation="softmax")
-net = tflearn.regression(net)
+net = tflearn.fully_connected(net,len(output[0]), activation="softmax" , name='my_output')
+net = tflearn.regression(net,optimizer="adam")
 
 model = tflearn.DNN(net)
-try:
+try:                                                       
     model.load("model.tflearn")
 except:
     model.fit(training , output , n_epoch=1000 , batch_size=8 , show_metric=True)
@@ -94,12 +95,21 @@ def bag_of_words(s,words):
     return numpy.array(bag)
 
 def chat():
+    
     print("start taliking with bot!")
     while(True):
-        inp = input("You : ")
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            r.adjust_for_ambient_noise(source,duration=1)
+            print("Say Something")
+            audio = r.listen(source)
+        try:
+            inp = r.recognize_google(audio)
+            print("you : "+inp)
+        except:
+            chat()
         if inp.lower() == "quit":
             break
-
         result = model.predict([bag_of_words(inp , words)])[0]
         results_index = numpy.argmax(result)
         tag = labels[results_index]
@@ -108,9 +118,45 @@ def chat():
             for tg in data["intents"]:
                 if tg['tag'] == tag:
                     responses = tg["responses"]
-                    print("Railway Support : "+random.choice(responses))
+                    bot_response = random.choice(responses)
+                    print("Railway Support : "+bot_response)
+                    if(bot_response=="Please provide me your PNR" or bot_response=="Can I know your PNR"):
+                        engine = pyttsx3.init()
+                        en_voice_id = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0"
+                        engine.setProperty('voice',en_voice_id)
+                        engine.say(bot_response)
+                        engine.setProperty('rate',120)
+                        engine.setProperty('volume', 0.9)
+                        engine.runAndWait() 
+                        obj = PnrStatus()
+                        obj.getStatus()
+                    elif(bot_response=="Please provide me train number"):
+                        engine = pyttsx3.init()
+                        en_voice_id = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0"
+                        engine.setProperty('voice',en_voice_id)
+                        engine.say(bot_response)
+                        engine.setProperty('rate',120)
+                        engine.setProperty('volume', 0.9)
+                        engine.runAndWait() 
+                        obj1 = PnrStatus()
+                        obj1.getTrainStatus()
+                    else:
+                        engine = pyttsx3.init()
+                        en_voice_id = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0"
+                        engine.setProperty('voice',en_voice_id)
+                        engine.say(bot_response)
+                        engine.setProperty('rate',120)
+                        engine.setProperty('volume', 0.9)
+                        engine.runAndWait()            
         else:
-            print("I didn't get that , try again");
-            print("Developer is still working on me !!")
+            engine = pyttsx3.init()
+            print("I didn't get that , try again,\ Developer is still working on me !!")
+            en_voice_id = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0"
+            engine.setProperty('voice',en_voice_id)
+            engine.say("I didn't get that , try again, Developer is still working on me !!")
+            engine.setProperty('rate',120)
+            engine.setProperty('volume', 0.9)
+            engine.runAndWait()
+            
 chat()
 
