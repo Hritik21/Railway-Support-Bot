@@ -16,7 +16,7 @@
         },
         {"tag": "name",
          "patterns": ["what is your name", "what should I call you", "whats your name?"],
-         "responses": ["I am Railway Support bot.", "I'm bot created by Indian Railway!", "I'm bot , here to help you"],
+         "responses": ["I am Railway Support bot.", "I'm bot created by Hritik Maheshwari!", "I'm bot , here to help you"],
          "context_set": ""
         },
 		{"tag": "means",
@@ -54,22 +54,22 @@
 		},
 		{"tag" : "tatkal sleeper",
 		"patterns" : ["what are tatkal charges for sleeper" , "tatkal charges for sleeper" , "what are sleeper tatkal charges" , "sleeper tatkal cost"  , "sleeper tatkal charges"],
-		"responses" : ["Minumum Tatakal Charges(in Rs) : 90 \nMaximum Tatkal Charges(in Rs) : 175"],
+		"responses" : ["Minimum Tatkal Charges(in Indian Rupees) : 90 \nMaximum Tatkal Charges(in Indian Rupees) : 175"],
 		"context_set" : ""
 		},
 		{"tag" : "tatkal ac chair car",
 		"patterns" : ["what are tatkal charges for ac chair car" , "tatkal charges for ac chair car" , "what are ac chair car charges" , "ac chair car cost"  , "ac chair car charges"],
-		"responses" : ["Minumum Tatakal Charges(in Rs) : 100 \nMaximum Tatkal Charges(in Rs) : 200"],
+		"responses" : ["Minimum Tatkal Charges(in Indian Rupees) : 100 \nMaximum Tatkal Charges(in Indian Rupees) : 200"],
 		"context_set" : ""
 		},
 		{"tag" : "tatkal ac 3 tier",
 		"patterns" : ["what are tatkal charges for ac 3 tier" , "tatkal charges for ac 3 tier" , "what are ac 3 tier tatkal charges" , "ac 3 tier tatkal cost"  , "ac 3 tier tatkal charges"],
-		"responses" : ["Minumum Tatakal Charges(in Rs) : 250 \nMaximum Tatkal Charges(in Rs) : 350"],
+		"responses" : ["Minimum Tatkal Charges(in Indian Rupees) : 250 \nMaximum Tatkal Charges(in Indian Rupees) : 350"],
 		"context_set" : ""
 		},
 		{"tag" : "tatkal ac 2 tier",
 		"patterns" : ["what are tatkal charges for ac 2 tier" , "tatkal charges for ac 2 tier" , "what are ac 2 tier tatkal charges" , "ac 2 tier tatkal cost"  , "ac 2 tier tatkal charges"],
-		"responses" : ["Minumum Tatakal Charges(in Rs) : 300 \nMaximum Tatkal Charges(in Rs) : 400"],
+		"responses" : ["Minimum Tatkal Charges(in Indian Rupees) : 300 \nMaximum Tatkal Charges(in Indian Rupees) : 400"],
 		"context_set" : ""
 		},
 		{"tag" : "tatkal booking",
@@ -87,6 +87,18 @@
 		"tag" : "okay",
 		"patterns" : ["okay" , "ok" , "k" , "yes"],
 		"responses":["Anything else?" ,"Need more support ?"],
+		"context_set" : ""
+		},
+		{
+		"tag" : "know my ticket",
+		"patterns" : ["is my ticket confirm" , "give me my ticket confirmation info","what about my ticket confirmation"],
+		"responses":["Please provide me your PNR" ,"Can I know your PNR"],
+		"context_set" : ""
+		},
+		{
+		"tag" : "train arrival",
+		"patterns" : ["when my train will arrive","my train will get late","my train is on time or not"],
+		"responses":["Please provide me train number"],
 		"context_set" : ""
 		}
 		
